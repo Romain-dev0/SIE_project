@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+
+        <menuitem id="server_status_root" name="Server Status">
+            <menuitem id="server_status_first" name="Current servers">
+                <menuitem id="server_status_add" action="server_status_action"/>
+            </menuitem>
+        </menuitem>
+
+    </odoo>
