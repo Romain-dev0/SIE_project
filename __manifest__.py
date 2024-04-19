@@ -12,5 +12,9 @@
         'views/server_status_views.xml',
         'views/server_status_menus.xml',
         'security/ir.model.access.csv',
-    ]
+    ],
+    'external_dependencies': {
+    'python': ['requests'],
+    }
+
 }

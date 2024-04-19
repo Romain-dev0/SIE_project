@@ -1,4 +1,5 @@
 from odoo import fields, models
+import requests
 
 
 class ServerStatusLog(models.Model):
@@ -11,11 +12,20 @@ class ServerStatusLog(models.Model):
     num_player = fields.Integer('Number player')
 
     def fetch_external_data(self):
-        url = "http://api.example.com/data"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            self.update_data(data)
+            if not self.ip_addr:
+                print("no_ip_addr")
+                return
+            url = f"https://api.mcsrvstat.us/3/{self.ip_addr}"
+            response = requests.get(url)
+            if response.status_code == 200:
+                data = response.json()
+                self.update_data(data)
+            else:
+                _logger.error(f"Failed to fetch data for IP {self.ip_addr}: {response.status_code}")
+
 
     def update_data(self, data):
-        ...
+            #updating data
+            self.is_online = data.get('online', False)
+            self.num_player = data.get('players', {}).get('online', 0)
+            self.name = data.get('motd', {}).get('clean', [self.name])[0] 

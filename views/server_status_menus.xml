@@ -6,5 +6,5 @@
                 <menuitem id="server_status_add" action="server_status_action"/>
             </menuitem>
         </menuitem>
-
+        
     </odoo>
